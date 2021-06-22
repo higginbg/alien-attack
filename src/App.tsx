@@ -20,6 +20,7 @@ function App() {
   const attackTimeout = useRef<ReturnType<typeof setInterval>>();
     
   const gameOver = alienHealth === 0 || playerHealth === 0;
+  const gameUntouched = playerHealth === 100 && alienHealth === 100;
   const attackDisabled = !gameStarted || gameOver;
   const rechargeDisabled = !gameStarted || playerHealth === 100 || gameOver;
   
@@ -111,7 +112,7 @@ function App() {
   }, [setGameStarted, updateLog]);
   
   const reset = useCallback(() => {
-    if (playerHealth === 100 && alienHealth === 100) {
+    if (gameUntouched) {
       return;
     }
 
@@ -131,7 +132,7 @@ function App() {
     setAlienHealth(100);
  
     start();
-  }, [setPlayerHealth, setAlienHealth, alienHealth, playerHealth, start, gameOver, updateLog]);
+  }, [setPlayerHealth, setAlienHealth, gameUntouched, start, gameOver, updateLog]);
   
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
@@ -192,7 +193,7 @@ function App() {
   }, [alienHealth, playerHealth, updateLog, gameOver]);
   
   useEffect(() => {
-    if (gameOver || (playerHealth === 100 && alienHealth === 100)) {
+    if (gameOver || gameUntouched) {
       if (attackInterval.current) {
         clearInterval(attackInterval.current);
       }
@@ -211,11 +212,11 @@ function App() {
     attackInterval.current = setInterval(() => {
       alienAttack();
     }, 200);
-  }, [gameStarted, gameOver, playerHealth, alienHealth, alienAttack]);
+  }, [gameStarted, gameOver, gameUntouched, alienAttack]);
 
   let message;
   let messageColor = 'white';
-  if (gameStarted && playerHealth === 100 && alienHealth === 100) {
+  if (gameStarted && gameUntouched) {
     message = <p style={{ fontSize: '1em' }}>Make the first move!</p>;
   } else if (playerHealth === 0) {
     message = <p>Game over!</p>;
@@ -286,7 +287,7 @@ function App() {
                 reset={reset}
                 attackDisabled={attackDisabled}
                 rechargeDisabled={rechargeDisabled}
-                restartDisabled={playerHealth === 100 && alienHealth === 100}
+                restartDisabled={gameUntouched}
               />
             </>
           )}
