@@ -1,0 +1,46 @@
+@import '../../App.scss';
+
+.Buttons {
+  margin: 0 auto;
+  margin-top: 20px;
+  justify-content: center;
+  width: 80%;
+  
+  div {
+    width: 100%;
+    display: flex;
+  }
+}
+
+.Buttons button {
+  &.Recharge {
+    background-color: $gold;
+  }
+  
+  &.Attack {
+    background-color: green;
+  }
+  
+  &.Exit {
+    background-color: red;
+    width: 300px;
+  }
+  
+  &.Restart {
+    background-color: #0085C7;
+    width: 300px;
+  }
+
+  &:hover {
+    opacity: 0.75;
+  }
+  
+  &:disabled {
+    background-color: $overcast !important;
+    cursor: not-allowed;
+    
+    &:hover {
+      opacity: 1;
+    }
+  }
+}

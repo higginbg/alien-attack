@@ -1,0 +1,32 @@
+@import '../../App.scss';
+
+.Log {
+  width: 500px;
+  margin: 75px auto 50px auto;
+  
+  & h2 {
+    font-size: 1em;
+    margin-bottom: 10px;
+  }
+
+  & ul {
+    list-style-type: none;
+    padding: 0;
+    background: $dark-blue;
+    border: 1px solid white;
+    padding: 10px;
+    border-radius: $radius;
+    height: 300px;
+    overflow-y: auto;
+
+    & li {
+      text-align: left;
+      font-size: 0.5em;
+      margin: 10px 0;
+
+      & div {
+        margin: 0 5px;
+      }
+    }
+  }
+}

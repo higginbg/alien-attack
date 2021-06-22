@@ -1,0 +1,22 @@
+.HealthBar {
+  height: 100%;
+  width: 25px;
+  font-size: 5em;
+  padding: 0;
+  border: 1px solid white;
+  position: relative;
+  display: flex;
+  align-items: flex-end;
+  
+  .Label {
+    text-transform: capitalize;
+    position: absolute;
+    top: -35px;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+  
+  .Bar {
+    width: 100%;
+  }
+}
