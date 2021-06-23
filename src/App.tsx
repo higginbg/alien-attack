@@ -36,6 +36,7 @@ function App() {
     document.querySelector('body')!.classList.add(className);
     if (attackTimeout.current) {
       clearTimeout(attackTimeout.current);
+      attackTimeout.current = undefined;
     }
     attackTimeout.current = setTimeout(() => {
       // @ts-expect-error
@@ -196,8 +197,8 @@ function App() {
     if (gameOver || gameUntouched) {
       if (attackInterval.current) {
         clearInterval(attackInterval.current);
+        attackInterval.current = undefined;
       }
-      attackInterval.current = undefined;
       return;
     }
   
